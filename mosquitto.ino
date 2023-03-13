@@ -37,19 +37,7 @@ union pack
 } sdp;
 
 void setup() {
-  Serial.begin(115200);
-  WiFi.disconnect(true);
-  delay(1000);
-  WiFi.begin(ssid, pass);
-  delay(1000);
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(500); Serial.print(".");
-    }
-    IPAddress ip = WiFi.localIP();
-    Serial.print("IP Address: ");
-    Serial.println(ip);
-    Serial.println("WiFi setup ok");
-    delay(1000);
+  
   setup_mqtt();
   //client.publish("srt/victor", "Bonjour c'est Victor");
 
@@ -92,6 +80,22 @@ void loop()
   LoRa.endPacket();
   d1++; d2+=2;
   delay(2000);    
+}
+void setup_wifi(){
+  // Initialisation
+  Serial.begin(115200);
+  WiFi.disconnect(true);
+  delay(1000);
+  WiFi.begin(ssid, pass);
+  delay(1000);
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(500); Serial.print(".");
+    }
+    IPAddress ip = WiFi.localIP();
+    Serial.print("IP Address: ");
+    Serial.println(ip);
+    Serial.println("WiFi setup ok");
+    delay(1000);
 }
 
 // Mise en place du serveur mqtt
